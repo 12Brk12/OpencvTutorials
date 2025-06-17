@@ -165,7 +165,7 @@ plt.show()
 
 ############################### Evaluación
 score = model.evaluate(X_test, y_test, verbose=0)
-print("Test Score:", score[0])
+print("Test Loss:", score[0])
 print("Test Accuracy:", score[1])
 
 ############################### Guardar modelo
