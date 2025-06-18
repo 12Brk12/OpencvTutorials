@@ -20,17 +20,24 @@ def load_model_and_labels():
 
 model, label_dict = load_model_and_labels()
 
-# Preprocesamiento robusto
+# Preprocesamiento robusto, igual que en test.py
 def preprocessing(img_pil):
-    img = img_pil.resize((32, 32))
-    img = np.array(img)
+    img = np.array(img_pil)
 
-    # Convertir a escala de grises si es RGB
-    if img.ndim == 3:
-        img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    # Convertir de RGB a BGR (porque cv2 espera BGR)
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 
+    # Redimensionar a 32x32
+    img = cv2.resize(img, (32, 32))
+
+    # Escala de grises
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    # Ecualizar histograma y normalizar
     img = cv2.equalizeHist(img)
     img = img / 255.0
+
+    # Redimensionar a (1, 32, 32, 1)
     return img.reshape(1, 32, 32, 1).astype("float32")
 
 # Entrada de imagen

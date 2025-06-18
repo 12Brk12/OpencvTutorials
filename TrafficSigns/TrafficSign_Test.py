@@ -7,7 +7,7 @@ from tensorflow.keras.models import load_model
 frameWidth = 640
 frameHeight = 480
 brightness = 180
-threshold = 0.75
+threshold = 0.70
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 # Cargar modelo y etiquetas
@@ -42,7 +42,7 @@ while True:
         cv2.putText(imgOriginal, f"CLASS: {classIndex} - {className}",
                     (20, 35), font, 0.75, (0, 0, 255), 2)
         cv2.putText(imgOriginal, f"PROBABILITY: {round(probabilityValue * 100, 2)}%",
-                    (20, 75), font, 0.75, (0, 0, 255), 2)
+                    (20, 75), font, 0.75, (255, 0, 0), 2)
 
     cv2.imshow("Result", imgOriginal)
 
